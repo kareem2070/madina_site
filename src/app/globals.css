@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Critical CSS - Load first */
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap');
+
+/* Optimized Swiper CSS */
+@import 'swiper/css';
+
+/* Critical base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-almarai), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #1f2937;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* تحسينات للـ prose class */
+.prose {
+  @apply text-gray-800 leading-relaxed;
+}
+
+.prose h1 {
+  @apply text-3xl md:text-4xl font-bold text-gray-900 mb-6 mt-8;
+}
+
+.prose h2 {
+  @apply text-2xl md:text-3xl font-bold text-gray-900 mb-4 mt-6;
+}
+
+.prose h3 {
+  @apply text-xl md:text-2xl font-semibold text-gray-900 mb-3 mt-5;
+}
+
+.prose h4 {
+  @apply text-lg md:text-xl font-semibold text-gray-900 mb-2 mt-4;
+}
+
+.prose p {
+  @apply text-base md:text-lg mb-4 leading-relaxed;
+}
+
+.prose ul {
+  @apply list-disc list-inside mb-4 space-y-2;
+}
+
+.prose ol {
+  @apply list-decimal list-inside mb-4 space-y-2;
+}
+
+.prose li {
+  @apply text-base md:text-lg leading-relaxed;
+}
+
+.prose blockquote {
+  @apply border-r-4 border-primary bg-gray-50 p-4 my-6 italic text-gray-700;
+}
+
+.prose img {
+  @apply rounded-lg shadow-lg my-6 w-full h-auto;
+}
+
+.prose a {
+  @apply text-primary hover:text-orange-600 underline transition-colors duration-300;
+}
+
+.prose strong {
+  @apply font-bold text-gray-900;
+}
+
+.prose em {
+  @apply italic text-gray-700;
+}
+
+.prose code {
+  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+}
+
+.prose pre {
+  @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto my-6;
+}
+
+.prose pre code {
+  @apply bg-transparent text-white p-0;
+}
+
+/* تحسينات للجوال */
+@media (max-width: 768px) {
+  .prose {
+    @apply text-sm;
+  }
+  
+  .prose h1 {
+    @apply text-2xl;
+  }
+  
+  .prose h2 {
+    @apply text-xl;
+  }
+  
+  .prose h3 {
+    @apply text-lg;
+  }
+  
+  .prose p {
+    @apply text-sm;
+  }
+}
+
+@layer base {
+  :root {
+    --primary-color: #ffffff;
+    --secondary-color: #ffffff;
+    --button-color: #ffffff;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  .text-primary {
+    color: var(--primary-color);
+  }
+
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
+
+  .text-secondary {
+    color: var(--secondary-color);
+  }
+
+  .bg-secondary {
+    background-color: var(--secondary-color);
+  }
+
+  .bg-button {
+    background-color: var(--button-color);
+  }
+}
+/* تنسقات العناوين الريسية */
+h1 {
+  @apply text-4xl font-bold text-gray-900 mb-6 leading-tight;
+  @apply md:text-5xl;
+  @apply lg:text-6xl;
+}
+
+h2 {
+  @apply text-3xl font-bold text-gray-800 mt-8 mb-4 leading-snug;
+  @apply md:text-4xl;
+  @apply lg:text-5xl;
+}
+
+h3 {
+  @apply text-2xl font-bold text-gray-700 mt-6 mb-3 leading-normal;
+  @apply md:text-3xl;
+  @apply lg:text-4xl;
+}
+
+/* تنسيقات العناوين الفرعية */
+h4 {
+  @apply text-xl font-semibold text-gray-700 mt-4 mb-2;
+  @apply md:text-2xl;
+  @apply lg:text-3xl;
+}
+
+h5 {
+  @apply text-lg font-semibold text-gray-600 mt-3 mb-2;
+  @apply md:text-xl;
+  @apply lg:text-2xl;
+}
+
+h6 {
+  @apply text-base font-semibold text-gray-600 mt-2 mb-1;
+  @apply md:text-lg;
+  @apply lg:text-xl;
+}
+
+/* تأثيرات التحويم */
+h1:hover, h2:hover, h3:hover {
+  @apply text-blue-600 transition-colors duration-300;
+}
+
+h4:hover, h5:hover, h6:hover {
+  @apply text-blue-500 transition-colors duration-300;
+}
+
+/* تنسيقات خاصة للنسخة العربية */
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3,
+[dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
+  @apply tracking-normal;
+}
+
+/* تنسيقات التباعد للمحتوى المحيط */
+h1 + p, h2 + p, h3 + p,
+h4 + p, h5 + p, h6 + p {
+  @apply mt-4;
+}
+
+/* تنسيقات خاصة للباعة */
+@media print {
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-black;
+    @apply break-after-avoid;
+  }
+}
+
+p {
+  @apply text-lg;
+}

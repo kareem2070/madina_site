@@ -1,0 +1,176 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  mobile    String   @unique
+  createdAt DateTime @default(now())
+
+  @@map("user")
+}
+
+model Hero {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  imagePath   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("hero")
+}
+
+model AboutUs {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  imagePath   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tags        Tag[]
+
+  @@map("aboutus")
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  name      String
+  aboutUs   AboutUs? @relation(fields: [aboutUsId], references: [id])
+  aboutUsId Int?
+
+  @@map("tag")
+}
+
+model Service {
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String   @db.Text
+  content       String   @db.LongText
+  imagePath     String?
+  galleryImages String?  @db.LongText
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("service")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  price       Float
+  imagePath   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("product")
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  url       String   @unique
+  createdAt DateTime @default(now())
+
+  @@map("image")
+}
+
+model Video {
+  id        Int      @id @default(autoincrement())
+  url       String   @unique
+  createdAt DateTime @default(now())
+
+  @@map("video")
+}
+
+model WhyUs {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("whyus")
+}
+
+model CustomerReview {
+  id           Int      @id @default(autoincrement())
+  customerName String
+  review       String   @db.Text
+  rating       Int
+  region       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("customerreview")
+}
+
+model ContactInfo {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String @db.Text
+  address     String
+  email       String
+  city        String
+
+  @@map("contactinfo")
+}
+
+model Settings {
+  id             Int          @id @default(autoincrement())
+  companyName    String
+  description    String       @db.Text
+  whiteLogo      String?
+  blackLogo      String?
+  icon           String?
+  phoneNumber    String
+  whatsappNumber String
+  countryCode    String
+  city           String? // Optional field
+  socialLinks    SocialLink[]
+
+  @@map("settings")
+}
+
+model SocialLink {
+  id         Int      @id @default(autoincrement())
+  url        String
+  icon       String
+  settings   Settings @relation(fields: [settingsId], references: [id])
+  settingsId Int
+
+  @@map("sociallink")
+}
+
+model ColorSettings {
+  id             Int      @id @default(autoincrement())
+  primaryColor   String
+  secondaryColor String
+  buttonColor    String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("colorsettings")
+}
+
+model BlogPost {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String? // هذا هو الحقل الجديد للوصف
+  content     String   @db.LongText
+  slug        String   @unique
+  author      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tags        Json     @db.Json
+  coverImage  String?
+
+  @@map("blogpost")
+}
